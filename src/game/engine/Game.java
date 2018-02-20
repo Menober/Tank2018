@@ -1,5 +1,6 @@
 package game.engine;
 
+import game.assets.Assets;
 import game.display.Display;
 import game.input.KeyManager;
 import game.states.GameState;
@@ -32,7 +33,7 @@ public class Game implements Runnable{
         display=new Display(handler.getTitle(),handler.getWidth(),handler.getHeight());
         display.getFrame().addKeyListener(keyManager);
         tankColor=0;
-       // Assets.init();
+        Assets.init();
         currentState=new MenuState(handler);
 
     }

@@ -5,7 +5,7 @@ public class Launcher {
         Handler handler=new Handler();
         handler.setTitle("Tank 2018");
         handler.setWidth(800);
-        handler.setHeight(600);
+        handler.setHeight(640);
         Game game = new Game(handler);
         handler.setGame(game);
         handler.getGame().start();
