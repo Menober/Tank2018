@@ -1,11 +1,11 @@
-package entities;
+package game.entities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player {
-    BufferedImage[] skins;
-    int x, y;
+    private BufferedImage[] skins;
+    private int x, y;
     double speed;
     int skinIndex;
 
@@ -41,4 +41,11 @@ public class Player {
         g.drawImage(skins[skinIndex],x,y,64,64,null);
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }

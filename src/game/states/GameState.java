@@ -1,8 +1,9 @@
 package game.states;
 
-import entities.Player;
+import game.entities.Player;
 import game.assets.Assets;
 import game.engine.Handler;
+import game.world.Map;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@ public class GameState extends State {
 
     private Handler handler;
     private Player player;
+    private Map map;
     public GameState(Handler handler){
         this.handler=handler;
         BufferedImage[] skins = null;
@@ -20,6 +22,7 @@ public class GameState extends State {
             case 2:skins=Assets.tankGreen;break;
             case 3:skins=Assets.tankGrey;break;
         }
+        map=new Map(handler);
         this.player=new Player(skins,1,1);
     }
     @Override
@@ -33,11 +36,14 @@ public class GameState extends State {
         if(handler.getKeyManager().aRight)
             player.moveRight();
         player.update();
+
+        //  Tymczasowo// Koordynaty środka postaci podzielone przez szerowkosc/wysokosc aby uzyskac klocek pod postacią
+        System.out.println(map.getTile((player.getX()+32)/64,(player.getY()+32)/64).getId());
     }
 
     @Override
     public void render(Graphics g) {
-
+        map.render(g);
         player.render(g);
 
     }

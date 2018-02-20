@@ -24,7 +24,6 @@ public class Game implements Runnable{
 
     Game(Handler handler) {
         this.handler=handler;
-        this.display=new Display(handler.getTitle(),handler.getWidth(),handler.getHeight());
         keyManager=new KeyManager();
         handler.setKeyManager(keyManager);
     }
