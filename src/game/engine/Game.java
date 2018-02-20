@@ -1,6 +1,8 @@
 package game.engine;
 
 import game.display.Display;
+import game.input.KeyManager;
+import game.states.GameState;
 import game.states.MenuState;
 import game.states.State;
 
@@ -16,11 +18,23 @@ public class Game implements Runnable{
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
     private static State currentState;
+    private KeyManager keyManager;
+    public int tankColor;
 
     Game(Handler handler) {
         this.handler=handler;
         this.display=new Display(handler.getTitle(),handler.getWidth(),handler.getHeight());
-        currentState=new MenuState();
+        keyManager=new KeyManager();
+        handler.setKeyManager(keyManager);
+    }
+
+    private void init(){
+        display=new Display(handler.getTitle(),handler.getWidth(),handler.getHeight());
+        display.getFrame().addKeyListener(keyManager);
+        tankColor=0;
+       // Assets.init();
+        currentState=new MenuState(handler);
+
     }
 
     private void render(){
@@ -43,13 +57,17 @@ public class Game implements Runnable{
 
     private void update() {
         currentState.update();
+        keyManager.update();
     }
 
 
+    public void setCurrentState(State state){
+        currentState=state;
+    }
 
     @Override
     public void run() {
-       // init();
+        init();
 
         int fps=60;
         double timePerUpdate=1000000000/fps;
@@ -74,12 +92,13 @@ public class Game implements Runnable{
 
             if(timer>=1000000000){
                 System.out.println("Ticks and frames: "+ticks);
+
                 ticks=0;
                 timer=0;
             }
 
-
         }
+
         stop();
     }
 
@@ -93,14 +112,23 @@ public class Game implements Runnable{
     }
 
     private synchronized void stop(){
-        if(!isRunning)
-            return;
-        isRunning =false;
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+        System.exit(1);
+
+    }
+
+    public void setRunning(boolean running) {
+        this.isRunning=running;
+    }
+
+    public void changeTankColor() {
+        tankColor++;
+        if(tankColor>2)
+            tankColor=0;
+    }
+
+    public void startNewGame() {
+        GameState newGame=new GameState(handler);
+        setCurrentState(newGame);
     }
 }

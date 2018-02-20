@@ -1,9 +1,12 @@
 package game.engine;
 
+import game.input.KeyManager;
+
 public class Handler {
     private Game game;
     private String title;
     private int width,height;
+    private KeyManager keyManager;
 
     public void setGame(Game game) {
         this.game = game;
@@ -35,5 +38,13 @@ public class Handler {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public void setKeyManager(KeyManager keyManager) {
+        this.keyManager = keyManager;
+    }
+
+    public KeyManager getKeyManager() {
+        return keyManager;
     }
 }
