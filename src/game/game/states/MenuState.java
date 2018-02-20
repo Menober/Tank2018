@@ -15,9 +15,6 @@ public class MenuState extends State {
         g.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman",Font.BOLD,60));
         g.drawString("Hello World!",50,100);
-        g.setColor(Color.GREEN);
-        g.fillRect(260,70,30,30);
-        g.setColor(Color.RED);
-        g.fillRect(265,75,20,20);
+
     }
 }
