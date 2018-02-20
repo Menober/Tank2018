@@ -20,7 +20,7 @@ public class GameState extends State {
     public void render(Graphics g) {
         g.setColor(new Color(200,0,0));
         g.fillRect(0,0,handler.getWidth(),handler.getHeight());
-        g.drawImage(Assets.tank[0],20,20,64,64,null);
+        g.drawImage(Assets.tankYellow[0],20,20,64,64,null);
 
     }
 }

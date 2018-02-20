@@ -124,7 +124,7 @@ public class Game implements Runnable{
 
     public void changeTankColor() {
         tankColor++;
-        if(tankColor>2)
+        if(tankColor>3)
             tankColor=0;
     }
 
