@@ -1,8 +1,8 @@
 package game.engine;
 
 import game.display.Display;
-import game.game.states.MenuState;
-import game.game.states.State;
+import game.states.MenuState;
+import game.states.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -17,7 +17,7 @@ public class Game implements Runnable{
     private Graphics graphics;
     private static State currentState;
 
-    public Game(Handler handler) {
+    Game(Handler handler) {
         this.handler=handler;
         this.display=new Display(handler.getTitle(),handler.getWidth(),handler.getHeight());
         currentState=new MenuState();
@@ -92,7 +92,7 @@ public class Game implements Runnable{
         thread.start();
     }
 
-    public synchronized void stop(){
+    private synchronized void stop(){
         if(!isRunning)
             return;
         isRunning =false;
