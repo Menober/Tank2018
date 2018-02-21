@@ -48,4 +48,8 @@ public class Player {
     public int getY() {
         return y;
     }
+
+    public void setSpeed(double newSpeed) {
+    speed=newSpeed;
+    }
 }

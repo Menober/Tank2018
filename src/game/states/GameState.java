@@ -3,6 +3,7 @@ package game.states;
 import game.entities.Player;
 import game.assets.Assets;
 import game.engine.Handler;
+import game.tiles.Tile;
 import game.world.Map;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ public class GameState extends State {
             case 3:skins=Assets.tankGrey;break;
         }
         map=new Map(handler);
-        this.player=new Player(skins,1,1);
+        this.player=new Player(skins,65,65);
     }
     @Override
     public void update() {
@@ -36,9 +37,13 @@ public class GameState extends State {
         if(handler.getKeyManager().aRight)
             player.moveRight();
         player.update();
+        if( map.getTile((player.getX()+32)/64,(player.getY()+32)/64).equals(Tile.dirtTile))
+            player.setSpeed(1.5);
+        if(map.getTile((player.getX()+32)/64,(player.getY()+32)/64).equals(Tile.grassTile))
+            player.setSpeed(2);
 
         //  Tymczasowo// Koordynaty środka postaci podzielone przez szerowkosc/wysokosc aby uzyskac klocek pod postacią
-        System.out.println(map.getTile((player.getX()+32)/64,(player.getY()+32)/64).getId());
+        System.out.println(map.getTile((player.getX()+32)/64,(player.getY()+32)/64).getClass());
     }
 
     @Override
@@ -47,4 +52,7 @@ public class GameState extends State {
         player.render(g);
 
     }
+
+
+
 }

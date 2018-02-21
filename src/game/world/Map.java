@@ -8,14 +8,17 @@ import java.awt.*;
 
 public class Map {
 
-    int xCount=7,yCount=7;
-    int [][] tiles={    {0,0,0,0,0,0,0},
-                        {0,3,1,1,1,1,0},
-                        {0,1,2,2,2,1,0},
-                        {0,1,2,1,2,1,0},
-                        {0,1,2,3,2,1,0},
-                        {0,1,1,1,1,1,0},
-                        {0,0,0,0,0,0,0}
+    int xCount=12,yCount=9;
+    int [][] tiles={
+            {3,3,3,3,3,3,3,3,3,3,3,3},
+            {3,2,2,2,2,2,2,2,2,2,2,3},
+            {3,4,4,4,4,4,4,4,4,4,4,3},
+            {3,4,1,1,1,1,1,1,1,1,4,3},
+            {3,4,1,1,1,1,4,4,4,4,4,3},
+            {3,4,1,1,4,4,4,2,2,2,2,3},
+            {3,4,1,1,1,1,4,2,2,2,2,3},
+            {3,4,4,4,4,4,4,2,2,2,0,3},
+            {3,3,3,3,3,3,3,3,3,3,3,3}
     };
     Handler handler;
     public Map(Handler handler){
@@ -27,7 +30,7 @@ public class Map {
         if(x < 0 || y < 0 || x >= handler.getWidth() || y >= handler.getHeight())
             return Tile.grassTile;
 
-        Tile t = Tile.tiles[tiles[x][y]];
+        Tile t = Tile.tiles[tiles[y][x]];
         if(t == null)
             return Tile.dirtTile;
         return t;
@@ -36,11 +39,7 @@ public class Map {
     public void render(Graphics graphics){
         for(int i=0;i<yCount;i++)
             for(int j=0;j<xCount;j++)
-                switch(tiles[i][j]){
-                    case 0:graphics.drawImage(Assets.brick,64*j,64*i,64,64,null);break;
-                    case 1:graphics.drawImage(Assets.grass,64*j,64*i,64,64,null);break;
-                    case 2:graphics.drawImage(Assets.water,64*j,64*i,64,64,null);break;
-                    case 3:graphics.drawImage(Assets.stone,64*j,64*i,64,64,null);break;
-                }
+                Tile.tiles[tiles[i][j]].render(graphics,j*64,i*64);
+
     }
 }
