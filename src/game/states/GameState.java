@@ -28,6 +28,8 @@ public class GameState extends State {
     }
     @Override
     public void update() {
+
+
         if(handler.getKeyManager().aUp)
             player.moveUp();
         if(handler.getKeyManager().aDown)
@@ -37,13 +39,14 @@ public class GameState extends State {
         if(handler.getKeyManager().aRight)
             player.moveRight();
         player.update();
-        if( map.getTile((player.getX()+32)/64,(player.getY()+32)/64).equals(Tile.dirtTile))
+
+        if( map.getTile((int)(player.getX()+32)/64,(int)(player.getY()+32)/64).equals(Tile.dirtTile))
             player.setSpeed(1.5);
-        if(map.getTile((player.getX()+32)/64,(player.getY()+32)/64).equals(Tile.grassTile))
+        else if(map.getTile((int)(player.getX()+32)/64,(int)(player.getY()+32)/64).equals(Tile.grassTile))
             player.setSpeed(2);
 
         //  Tymczasowo// Koordynaty środka postaci podzielone przez szerowkosc/wysokosc aby uzyskac klocek pod postacią
-        System.out.println(map.getTile((player.getX()+32)/64,(player.getY()+32)/64).getClass());
+        System.out.println(map.getTile((int)(player.getX()+32)/64,(int)(player.getY()+32)/64).getClass());
     }
 
     @Override
